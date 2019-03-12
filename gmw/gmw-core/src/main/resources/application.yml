@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://120.79.155.125:3306?useUnicode=true&useSSL=false&characterEncoding=utf8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    tomcat:
+      max-idle: 10 # 最大等待连接中的数量，设为0则没有限制
+      max-active: 50 # 最大连接活动数
+      max-wait: 10000 # 最大等待毫秒数，单位为ms，超过时间会出错误信息
+      initial-size: 5 # 数据库连接池初始化连接数
+    name: springboot
