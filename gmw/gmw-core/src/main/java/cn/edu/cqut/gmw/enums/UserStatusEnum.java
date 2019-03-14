@@ -1,9 +1,11 @@
 package cn.edu.cqut.gmw.enums;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * @author 90949
  */
-
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum UserStatusEnum {
 
   /**
@@ -14,12 +16,12 @@ public enum UserStatusEnum {
   /**
    * 已注销
    */
-  LOGOUT(1),
+  LOGOUT(2),
 
   /**
    * 已停用
    */
-  STOP_USING(1);
+  STOP_USING(3);
 
   int index;
 

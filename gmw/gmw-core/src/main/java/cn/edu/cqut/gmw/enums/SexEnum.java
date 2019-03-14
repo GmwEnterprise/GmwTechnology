@@ -1,9 +1,11 @@
 package cn.edu.cqut.gmw.enums;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * @author Gmw
  */
-
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum SexEnum {
 
   /**

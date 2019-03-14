@@ -16,10 +16,19 @@
   <description>Demo project for Spring Boot</description>
 
   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
   </properties>
 
   <dependencies>
+
+    <!--mybatis启动器-->
+    <dependency>
+      <groupId>org.mybatis.spring.boot</groupId>
+      <artifactId>mybatis-spring-boot-starter</artifactId>
+      <version>2.0.0</version>
+    </dependency>
 
     <!--mysql的jdbc连接驱动-->
     <dependency>

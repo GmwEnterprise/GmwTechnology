@@ -2,12 +2,15 @@ package cn.edu.cqut.gmw.entity;
 
 import cn.edu.cqut.gmw.enums.SexEnum;
 import cn.edu.cqut.gmw.enums.UserStatusEnum;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.apache.ibatis.type.Alias;
 
 import java.util.Date;
 
 /**
  * @author 90949
  */
+@Alias("user")
 public class User {
 
   private Long id;
@@ -67,6 +70,7 @@ public class User {
     this.sex = sex;
   }
 
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   public Date getCreateTime() {
     return createTime;
   }

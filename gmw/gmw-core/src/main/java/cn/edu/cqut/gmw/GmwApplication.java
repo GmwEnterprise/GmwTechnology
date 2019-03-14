@@ -3,6 +3,9 @@ package cn.edu.cqut.gmw;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * @author 90949
+ */
 @SpringBootApplication
 public class GmwApplication {
 

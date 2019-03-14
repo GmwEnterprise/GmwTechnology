@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.cqut.gmw.dao.UserDao">
+
+  <resultMap id="userMap" type="user">
+    <id column="id" property="id"/>
+    <result column="user_name" property="userName"/>
+    <result column="phone_number" property="phoneNumber"/>
+    <result column="password" property="password"/>
+    <result column="email" property="email"/>
+    <result column="sex" property="sex"
+            typeHandler="cn.edu.cqut.gmw.typehandler.SexTypeHandler"/>
+    <result column="create_time" property="createTime"/>
+    <result column="user_status" property="userStatus"
+            typeHandler="cn.edu.cqut.gmw.typehandler.UserStatusTypeHandler"/>
+  </resultMap>
+
+  <select id="queryById" resultMap="userMap">
+    select * from sys_user where id = #{id}
+  </select>
+
+  <select id="queryList" resultMap="userMap">
+    select * from sys_user
+    <where>
+      <if test="userName != null and userName != ''">and user_name = #{userName}</if>
+      <if test="phoneNumber != null and phoneNumber != ''">and phone_number = #{phoneNumber}</if>
+      <if test="password != null and password != ''">and password = #{password}</if>
+      <if test="email != null and email != ''">and email = #{email}</if>
+      <if test="sex != null">
+        and sex = #{sex, typeHandler = cn.edu.cqut.gmw.typehandler.SexTypeHandler}
+      </if>
+      <if test="createTime != null">and create_time = #{createTime}</if>
+      <if test="userStatus != null">
+        and user_status = #{userStatus, typeHandler = cn.edu.cqut.gmw.typehandler.UserStatusTypeHandler}
+      </if>
+    </where>
+    order by user_name asc
+  </select>
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userName != null and userName != ''">user_name,</if>
+      <if test="phoneNumber != null and phoneNumber != ''">phone_number,</if>
+      <if test="password != null and password != ''">password,</if>
+      <if test="email != null and email != ''">email,</if>
+      <if test="sex != null">sex,</if>
+      <if test="createTime != null">create_time,</if>
+      <if test="userStatus != null">user_status,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userName != null and userName != ''">#{userName},</if>
+      <if test="phoneNumber != null and phoneNumber != ''">#{phoneNumber},</if>
+      <if test="password != null and password != ''">#{password},</if>
+      <if test="email != null and email != ''">#{email},</if>
+      <if test="sex != null">#{sex},</if>
+      <if test="createTime != null">#{createTime},</if>
+      <if test="userStatus != null">#{userStatus}</if>
+    </trim>
+  </insert>
+
+  <update id="update">
+    update sys_user
+    <set>
+      <if test="userName != null and userName != ''">user_name = #{userName},</if>
+      <if test="phoneNumber != null and phoneNumber != ''">phone_number = #{phoneNumber},</if>
+      <if test="password != null and password != ''">password = #{password},</if>
+      <if test="email != null and email != ''">email = #{email},</if>
+      <if test="sex != null">sex = #{sex},</if>
+      <if test="createTime != null">create_time = #{createTime},</if>
+      <if test="userStatus != null">user_status = #{userStatus},</if>
+    </set>
+    where id = #{id}
+  </update>
+
+  <delete id="delete">
+    delete from sys_user where id = #{id}
+  </delete>
+</mapper>
