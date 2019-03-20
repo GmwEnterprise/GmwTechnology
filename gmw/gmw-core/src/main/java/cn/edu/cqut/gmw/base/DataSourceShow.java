@@ -1,4 +1,4 @@
-package cn.edu.cqut.gmw.config;
+package cn.edu.cqut.gmw.base;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -19,7 +19,7 @@ public class DataSourceShow implements ApplicationContextAware {
   public void setApplicationContext(ApplicationContext context) throws BeansException {
     DataSource dataSource = context.getBean(DataSource.class);
     System.out.println("-----------------------------------------------------");
-    System.out.println("DataSource class name : " + dataSource.getClass().getName());
+    System.out.println("Spring生命周期监控 -> DataSource class name : " + dataSource.getClass().getName());
     System.out.println("-----------------------------------------------------");
   }
 }

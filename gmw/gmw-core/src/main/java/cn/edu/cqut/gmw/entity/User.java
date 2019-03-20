@@ -22,6 +22,9 @@ public class User {
   private Date createTime;
   private UserStatusEnum userStatus;
 
+  public User() {
+  }
+
   public Long getId() {
     return id;
   }

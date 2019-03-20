@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * @author Gmw
  */
-public class AjaxResult extends HashMap<String, Object> {
+public final class AjaxResult extends HashMap<String, Object> {
 
   private final static String CODE_KEY = "code";
 
