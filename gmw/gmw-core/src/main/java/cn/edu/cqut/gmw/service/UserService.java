@@ -29,14 +29,14 @@ public interface UserService {
    * @param user 字段
    * @return 受影响行数
    */
-  int add(User user);
+  User add(User user);
 
   /**
    * 修改现有user
    * @param user 字段
    * @return 受影响行数
    */
-  int modify(User user);
+  User modify(User user);
 
   /**
    * 删除指定主键的字段

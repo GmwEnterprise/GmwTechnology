@@ -23,14 +23,26 @@
 
   <dependencies>
 
-    <!--作为redis键值序列化工具-->
+    <!--spring security安全框架-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+
+    <!--作为redis键值序列化工具，也可以用jackson.databind-->
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
       <version>1.2.56</version>
     </dependency>
 
-    <!--redis启动器-->
+    <!--作为lettuce启动器的缓存连接池，如果没有这个，配置lettuce.pool会报错-->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-pool2</artifactId>
+    </dependency>
+
+    <!--spring-data-redis启动器-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-redis</artifactId>
@@ -43,7 +55,7 @@
       <version>0.9.1</version>
     </dependency>
 
-    <!--mybatis启动器-->
+    <!--mybatis-spring启动器-->
     <dependency>
       <groupId>org.mybatis.spring.boot</groupId>
       <artifactId>mybatis-spring-boot-starter</artifactId>

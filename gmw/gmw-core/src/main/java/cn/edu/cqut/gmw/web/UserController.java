@@ -1,66 +1,77 @@
 package cn.edu.cqut.gmw.web;
 
 import cn.edu.cqut.gmw.entity.User;
+import cn.edu.cqut.gmw.enums.UserStatusEnum;
+import cn.edu.cqut.gmw.redis.RedisUtils;
 import cn.edu.cqut.gmw.service.UserService;
 import cn.edu.cqut.gmw.util.AjaxResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author Gmw
  */
 @RestController
-@RequestMapping("/sys/user")
+@RequestMapping("/system/user")
 public class UserController {
 
   private final UserService userService;
+  private final RedisUtils redis;
 
-  public UserController(UserService userService) {
+  public UserController(
+      UserService userService,
+      RedisUtils redis) {
     this.userService = userService;
+    this.redis = redis;
   }
 
   @GetMapping("/{id}")
   public AjaxResult userMessage(@PathVariable("id") Long id) {
-    User user = userService.get(id);
-    if (user != null) {
-      return AjaxResult.success()
-          .set("user", user);
-    }
-    return AjaxResult.error("未找到相应用户实例");
-  }
-
-  @GetMapping("/list")
-  public AjaxResult userMessage(User user) {
-    List<User> list = userService.getList(user);
-    if (list != null && list.size() > 0 ) {
-      return AjaxResult.success()
-          .set("list", list);
+    User val = userService.get(id);
+    if (val != null && val.getId() != null) {
+      return AjaxResult.success().set("user", val);
     }
     return AjaxResult.error();
   }
 
-  @PostMapping("/modify")
-  public AjaxResult modifyMessage(User user) {
-    if (user == null || user.getId() == null) {
-      return AjaxResult.error("请求参数错误！");
+  @GetMapping("/list")
+  public AjaxResult userList(User user) {
+    return AjaxResult.success().set("list", userService.getList(user));
+  }
+
+  @PostMapping("/save")
+  public AjaxResult save(User user) {
+    User now;
+    if (user.getId() == null) {
+      now = userService.add(user);
+    } else {
+      now = userService.modify(user);
     }
-    User now = new User();
-    now.setUserName(user.getUserName());
-    now.setPhoneNumber(user.getPhoneNumber());
-    now.setEmail(user.getEmail());
-    now.setSex(user.getSex());
-    now.setPassword(user.getPassword());
-    int modify = userService.modify(now);
-    if (modify == 1) {
-      return AjaxResult.success();
-    }
-    return AjaxResult.error("修改错误！");
+    return AjaxResult.success().set("user", now);
   }
 
   @GetMapping("/login")
   public AjaxResult userLogin(User user) {
-    // TODO
-    return AjaxResult.error("登录失败");
+    User usr = new User();
+    usr.setPhoneNumber(user.getPhoneNumber());
+    List<User> result = userService
+        .getList(usr)
+        .stream()
+        .filter(item -> item.getUserStatus().equals(UserStatusEnum.NORMAL))
+        .collect(Collectors.toList());
+    if (result.size() == 1) {
+      User resultUser = result.get(0);
+      if (resultUser.getPassword().equals(user.getPassword())) {
+        String val = UUID.randomUUID().toString().replaceAll("-", "");
+        redis.set(val, resultUser, 10L);
+        return AjaxResult.success()
+            .set("currentUser", resultUser)
+            .set("token", val);
+      }
+    }
+    return AjaxResult.error();
   }
 }

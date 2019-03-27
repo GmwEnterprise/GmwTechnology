@@ -89,4 +89,18 @@ public class User {
   public void setUserStatus(UserStatusEnum userStatus) {
     this.userStatus = userStatus;
   }
+
+  @Override
+  public String toString() {
+    return "User{" +
+        "id=" + id +
+        ", userName='" + userName + '\'' +
+        ", phoneNumber='" + phoneNumber + '\'' +
+        ", password='" + password + '\'' +
+        ", email='" + email + '\'' +
+        ", sex=" + sex +
+        ", createTime=" + createTime +
+        ", userStatus=" + userStatus +
+        '}';
+  }
 }

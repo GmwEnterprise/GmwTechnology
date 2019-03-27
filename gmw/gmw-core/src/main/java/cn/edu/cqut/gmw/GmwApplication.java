@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @author 90949
+ * @author Gmw
  */
 @SpringBootApplication
 public class GmwApplication {
