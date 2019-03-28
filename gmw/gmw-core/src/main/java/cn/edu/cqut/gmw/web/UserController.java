@@ -2,6 +2,7 @@ package cn.edu.cqut.gmw.web;
 
 import cn.edu.cqut.gmw.entity.User;
 import cn.edu.cqut.gmw.enums.UserStatusEnum;
+import cn.edu.cqut.gmw.enums.status.LoginStatus;
 import cn.edu.cqut.gmw.redis.RedisUtils;
 import cn.edu.cqut.gmw.service.UserService;
 import cn.edu.cqut.gmw.util.AjaxResult;
@@ -60,18 +61,24 @@ public class UserController {
     List<User> result = userService
         .getList(usr)
         .stream()
-        .filter(item -> item.getUserStatus().equals(UserStatusEnum.NORMAL))
+        .filter(item -> !item.getUserStatus().equals(UserStatusEnum.LOGOUT))
         .collect(Collectors.toList());
     if (result.size() == 1) {
       User resultUser = result.get(0);
       if (resultUser.getPassword().equals(user.getPassword())) {
+        if (resultUser.getUserStatus().equals(UserStatusEnum.STOP_USING)) {
+          return AjaxResult.error(LoginStatus.STOP_USING);
+        }
         String val = UUID.randomUUID().toString().replaceAll("-", "");
+        // 保存登陆信息10分钟
         redis.set(val, resultUser, 10L);
-        return AjaxResult.success()
+        return AjaxResult.success(LoginStatus.SUCCESS)
             .set("currentUser", resultUser)
             .set("token", val);
+      } else {
+        return AjaxResult.error(LoginStatus.WRONG_PASSWORD);
       }
     }
-    return AjaxResult.error();
+    return AjaxResult.error(LoginStatus.NOT_EXISTS);
   }
 }

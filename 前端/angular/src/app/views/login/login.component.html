@@ -1,3 +1,33 @@
-<p>
-  login works!
-</p>
+<div class="full-page">
+  <div class="wrapper">
+    <form nz-form class="login-form" [formGroup]="loginForm" (ngSubmit)="submit()">
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group [nzPrefix]="prefixUser">
+            <input nz-input type="text" placeholder="手机号码" formControlName="phone" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group [nzPrefix]="prefixLock">
+            <input nz-input type="password" placeholder="密码" formControlName="password" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <label nz-checkbox formControlName="remember">
+            <span>记住我</span>
+          </label>
+          <a class="login-form-forgot" class="login-form-forgot">忘记密码</a>
+          <button type="submit" nz-button class="login-form-button" [nzType]="'primary'" [disabled]="loginForm.invalid">登入</button>
+          或
+          <a href="">注册</a>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+    <ng-template #prefixUser><i nz-icon type="user"></i></ng-template>
+    <ng-template #prefixLock><i nz-icon type="lock"></i></ng-template>
+  </div>
+</div>

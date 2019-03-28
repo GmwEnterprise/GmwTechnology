@@ -27,7 +27,7 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
-    cache-enabled: true # 开启mybatis全局二级缓存
+    cache-enabled: true # 是否启用mybatis全局二级缓存
   mapper-locations: classpath:mappers/*.xml
   type-aliases-package: cn.edu.cqut.gmw.entity
   type-handlers-package: cn.edu.cqut.gmw.typehandler
@@ -36,3 +36,4 @@ logging:
     root: INFO
     org.apache.ibatis: DEBUG
     org.mybatis: DEBUG
+    org.springframework.web: DEBUG

@@ -20,6 +20,10 @@ public final class AjaxResult extends HashMap<String, Object> {
     return this;
   }
 
+  public static AjaxResult hashMap() {
+    return new AjaxResult();
+  }
+
   /**
    * 无法覆盖原本的code和message
    *
@@ -35,7 +39,7 @@ public final class AjaxResult extends HashMap<String, Object> {
     return this;
   }
 
-  public static AjaxResult success(String message) {
+  public static AjaxResult success(Object message) {
     AjaxResult ajaxResult = new AjaxResult();
     ajaxResult.put(CODE_KEY, "1");
     ajaxResult.put(MESSAGE_KEY, message);
@@ -49,7 +53,7 @@ public final class AjaxResult extends HashMap<String, Object> {
     return ajaxResult;
   }
 
-  public static AjaxResult error(String message) {
+  public static AjaxResult error(Object message) {
     AjaxResult ajaxResult = new AjaxResult();
     ajaxResult.put(CODE_KEY, "0");
     ajaxResult.put(MESSAGE_KEY, message);
