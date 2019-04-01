@@ -1,47 +1,29 @@
 package cn.edu.cqut.gmw.service;
 
-import cn.edu.cqut.gmw.entity.User;
-
-import java.util.List;
+import cn.edu.cqut.gmw.dto.UserMessageDto;
+import cn.edu.cqut.gmw.dto.execution.UserExecution;
+import cn.edu.cqut.gmw.enums.status.LoginStatus;
+import cn.edu.cqut.gmw.enums.status.RegisterStatus;
 
 /**
+ * 用户类的操作
+ *
  * @author Gmw
  */
 public interface UserService {
 
   /**
-   * 获取单个User实例
+   * 验证用户信息，用于登陆
    *
-   * @param id 主键
-   * @return 结果
+   * @param userMessage 用户信息
+   * @return 执行后的结果
    */
-  User get(Long id);
+  UserExecution<LoginStatus> validUser(UserMessageDto userMessage);
 
   /**
-   * 获取User列表
-   * @param user 条件
-   * @return 结果
+   * 添加新的账户
+   * @param userMessage 账户基本信息
+   * @return 添加结果
    */
-  List<User> getList(User user);
-
-  /**
-   * 新增一个user
-   * @param user 字段
-   * @return 受影响行数
-   */
-  User add(User user);
-
-  /**
-   * 修改现有user
-   * @param user 字段
-   * @return 受影响行数
-   */
-  User modify(User user);
-
-  /**
-   * 删除指定主键的字段
-   * @param id 主键
-   * @return 受影响行数
-   */
-  int remove(Long id);
+  UserExecution<RegisterStatus> addNewUser(UserMessageDto userMessage);
 }

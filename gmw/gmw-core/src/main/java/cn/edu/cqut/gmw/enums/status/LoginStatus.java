@@ -28,7 +28,12 @@ public enum LoginStatus {
   /**
    * 账户已停用
    */
-  STOP_USING(4, "账户已停用");
+  STOP_USING(4, "账户已停用"),
+
+  /**
+   * 输入参数错误
+   */
+  INVALID_PARAM(5, "参数错误");
 
   int code;
 
@@ -37,5 +42,13 @@ public enum LoginStatus {
   LoginStatus(int code, String msg) {
     this.code = code;
     this.msg = msg;
+  }
+
+  public int getCode() {
+    return code;
+  }
+
+  public String getMsg() {
+    return msg;
   }
 }

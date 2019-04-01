@@ -11,13 +11,9 @@ import java.util.List;
 @Mapper
 public interface UserDao {
 
-  /**
-   * 通过主键查询字段
-   *
-   * @param id sys_user表主键
-   * @return 结果
-   */
   User queryById(Long id);
+
+  User queryByPhone(String phoneNumber);
 
   List<User> queryList(User user);
 

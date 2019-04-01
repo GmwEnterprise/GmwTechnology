@@ -10,6 +10,7 @@ import { Config } from '../api/config';
 export class ConfigComponent implements OnInit {
   config: Config = null;
   headers: string[];
+  error: any;
 
   constructor(private configService: ConfigService) { }
 
@@ -18,7 +19,10 @@ export class ConfigComponent implements OnInit {
 
   showConfig() {
     this.configService.getConfig()
-      .subscribe((data: Config) => this.config = { ...data });
+      .subscribe(data => this.config = { ...data }, error => {
+        console.error(`error -> ${error}`);
+        this.error = error;
+      });
   }
 
   showConfigResponse() {
@@ -28,6 +32,9 @@ export class ConfigComponent implements OnInit {
         const keys = response.headers.keys();
         this.headers = keys.map(key => `${key}: ${response.headers.get(key)}`);
         this.config = { ...response.body };
-      });
+      }, error => {
+        console.error(typeof error);
+        this.error = error;
+      }, () => console.log('the end.'));
   }
 }

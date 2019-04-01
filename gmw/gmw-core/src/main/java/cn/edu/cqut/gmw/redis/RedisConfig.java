@@ -68,7 +68,8 @@ public class RedisConfig {
   @Bean(name = "redisCacheManager")
   public RedisCacheManager initRedisCacheManager(RedisConnectionFactory redisConnectionFactory) {
     RedisCacheWriter writer = RedisCacheWriter.lockingRedisCacheWriter(redisConnectionFactory);
-    RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
+    RedisCacheConfiguration config = RedisCacheConfiguration
+        .defaultCacheConfig()
         // 设置键序列化
         .serializeKeysWith(
             RedisSerializationContext

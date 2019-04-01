@@ -11,22 +11,25 @@ public enum UserStatusEnum {
   /**
    * 正常账户
    */
-  NORMAL(1),
+  NORMAL(1, "正常使用"),
 
   /**
    * 已注销
    */
-  LOGOUT(2),
+  LOGOUT(2, "已注销"),
 
   /**
    * 已停用
    */
-  STOP_USING(3);
+  STOP_USING(3, "已停用");
 
   int index;
 
-  UserStatusEnum(int index) {
+  String status;
+
+  UserStatusEnum(int index, String status) {
     this.index = index;
+    this.status = status;
   }
 
   public static UserStatusEnum valueOf(int index) {
@@ -40,5 +43,9 @@ public enum UserStatusEnum {
 
   public int getIndex() {
     return index;
+  }
+
+  public String getStatus() {
+    return status;
   }
 }

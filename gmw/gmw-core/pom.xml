@@ -23,12 +23,18 @@
 
   <dependencies>
 
-    <!--spring security安全框架-->
-    <!--
+    <!--spring security安全框架--> <!--
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
     </dependency> -->
+
+    <!--常用工具类-->
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.6</version>
+    </dependency>
 
     <!--作为redis键值序列化工具，也可以用jackson.databind-->
     <dependency>

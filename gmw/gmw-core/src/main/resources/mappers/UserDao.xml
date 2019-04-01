@@ -12,12 +12,20 @@
     <result column="sex" property="sex"
             typeHandler="cn.edu.cqut.gmw.typehandler.SexTypeHandler"/>
     <result column="create_time" property="createTime"/>
+    <result column="create_addr" property="createAddr"/>
+    <result column="create_mac" property="createMac"/>
+    <result column="last_login_time" property="lastLoginTime"/>
+    <result column="last_login_addr" property="lastLoginAddr"/>
     <result column="user_status" property="userStatus"
             typeHandler="cn.edu.cqut.gmw.typehandler.UserStatusTypeHandler"/>
   </resultMap>
 
   <select id="queryById" resultMap="userMap">
     select * from sys_user where id = #{id}
+  </select>
+
+  <select id="queryByPhone" resultMap="userMap">
+    select * from sys_user where phone_number = #{phoneNumber}
   </select>
 
   <select id="queryList" resultMap="userMap">
@@ -31,6 +39,10 @@
         and sex = #{sex, typeHandler = cn.edu.cqut.gmw.typehandler.SexTypeHandler}
       </if>
       <if test="createTime != null">and create_time = #{createTime}</if>
+      <if test="createAddr != null">and create_addr = #{createAddr}</if>
+      <if test="createMac != null">and create_mac = #{createMac}</if>
+      <if test="lastLoginTime != null">and last_login_time = #{lastLoginTime}</if>
+      <if test="lastLoginAddr != null">and last_login_addr = #{lastLoginAddr}</if>
       <if test="userStatus != null">
         and user_status = #{userStatus, typeHandler = cn.edu.cqut.gmw.typehandler.UserStatusTypeHandler}
       </if>
@@ -44,19 +56,29 @@
       <if test="userName != null and userName != ''">user_name,</if>
       <if test="phoneNumber != null and phoneNumber != ''">phone_number,</if>
       <if test="password != null and password != ''">password,</if>
-      <if test="email != null and email != ''">email,</if>
+      email,
       <if test="sex != null">sex,</if>
       <if test="createTime != null">create_time,</if>
+      <if test="createAddr != null">create_addr,</if>
+      <if test="createMac != null">create_mac,</if>
+      <if test="lastLoginTime != null">last_login_time,</if>
+      <if test="lastLoginAddr != null">last_login_addr,</if>
       <if test="userStatus != null">user_status,</if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userName != null and userName != ''">#{userName},</if>
       <if test="phoneNumber != null and phoneNumber != ''">#{phoneNumber},</if>
       <if test="password != null and password != ''">#{password},</if>
-      <if test="email != null and email != ''">#{email},</if>
-      <if test="sex != null">#{sex},</if>
+      #{email},
+      <if test="sex != null">#{sex, typeHandler = cn.edu.cqut.gmw.typehandler.SexTypeHandler},</if>
       <if test="createTime != null">#{createTime},</if>
-      <if test="userStatus != null">#{userStatus}</if>
+      <if test="createAddr != null">#{createAddr},</if>
+      <if test="createMac != null">#{createMac},</if>
+      <if test="lastLoginTime != null">#{lastLoginTime},</if>
+      <if test="lastLoginAddr != null">#{lastLoginAddr},</if>
+      <if test="userStatus != null">
+        #{userStatus, typeHandler = cn.edu.cqut.gmw.typehandler.UserStatusTypeHandler},
+      </if>
     </trim>
   </insert>
 
@@ -66,10 +88,16 @@
       <if test="userName != null and userName != ''">user_name = #{userName},</if>
       <if test="phoneNumber != null and phoneNumber != ''">phone_number = #{phoneNumber},</if>
       <if test="password != null and password != ''">password = #{password},</if>
-      <if test="email != null and email != ''">email = #{email},</if>
-      <if test="sex != null">sex = #{sex},</if>
+      email = #{email},
+      <if test="sex != null">sex = #{sex, typeHandler = cn.edu.cqut.gmw.typehandler.SexTypeHandler},</if>
       <if test="createTime != null">create_time = #{createTime},</if>
-      <if test="userStatus != null">user_status = #{userStatus},</if>
+      <if test="createAddr != null">create_addr = #{createAddr},</if>
+      <if test="createMac != null">create_mac = #{createMac},</if>
+      <if test="lastLoginTime != null">last_login_time = #{lastLoginTime},</if>
+      <if test="lastLoginAddr != null">last_login_addr = #{lastLoginAddr},</if>
+      <if test="userStatus != null">
+        user_status = #{userStatus, typeHandler = cn.edu.cqut.gmw.typehandler.UserStatusTypeHandler},
+      </if>
     </set>
     where id = #{id}
   </update>
