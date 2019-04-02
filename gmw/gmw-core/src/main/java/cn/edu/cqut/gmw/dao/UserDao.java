@@ -15,6 +15,8 @@ public interface UserDao {
 
   User queryByPhone(String phoneNumber);
 
+  User queryByUserName(String userName);
+
   List<User> queryList(User user);
 
   int insert(User user);

@@ -10,14 +10,14 @@
     <result column="password" property="password"/>
     <result column="email" property="email"/>
     <result column="sex" property="sex"
-            typeHandler="cn.edu.cqut.gmw.typehandler.SexTypeHandler"/>
+            typeHandler="cn.edu.cqut.gmw.common.typehandler.SexTypeHandler"/>
     <result column="create_time" property="createTime"/>
     <result column="create_addr" property="createAddr"/>
     <result column="create_mac" property="createMac"/>
     <result column="last_login_time" property="lastLoginTime"/>
     <result column="last_login_addr" property="lastLoginAddr"/>
     <result column="user_status" property="userStatus"
-            typeHandler="cn.edu.cqut.gmw.typehandler.UserStatusTypeHandler"/>
+            typeHandler="cn.edu.cqut.gmw.common.typehandler.UserStatusTypeHandler"/>
   </resultMap>
 
   <select id="queryById" resultMap="userMap">
@@ -28,6 +28,10 @@
     select * from sys_user where phone_number = #{phoneNumber}
   </select>
 
+  <select id="queryByUserName" resultMap="userMap">
+    select * from sys_user where user_name = #{userName}
+  </select>
+
   <select id="queryList" resultMap="userMap">
     select * from sys_user
     <where>
@@ -36,7 +40,7 @@
       <if test="password != null and password != ''">and password = #{password}</if>
       <if test="email != null and email != ''">and email = #{email}</if>
       <if test="sex != null">
-        and sex = #{sex, typeHandler = cn.edu.cqut.gmw.typehandler.SexTypeHandler}
+        and sex = #{sex, typeHandler = cn.edu.cqut.gmw.common.typehandler.SexTypeHandler}
       </if>
       <if test="createTime != null">and create_time = #{createTime}</if>
       <if test="createAddr != null">and create_addr = #{createAddr}</if>
@@ -44,7 +48,7 @@
       <if test="lastLoginTime != null">and last_login_time = #{lastLoginTime}</if>
       <if test="lastLoginAddr != null">and last_login_addr = #{lastLoginAddr}</if>
       <if test="userStatus != null">
-        and user_status = #{userStatus, typeHandler = cn.edu.cqut.gmw.typehandler.UserStatusTypeHandler}
+        and user_status = #{userStatus, typeHandler = cn.edu.cqut.gmw.common.typehandler.UserStatusTypeHandler}
       </if>
     </where>
     order by user_name asc
@@ -70,14 +74,14 @@
       <if test="phoneNumber != null and phoneNumber != ''">#{phoneNumber},</if>
       <if test="password != null and password != ''">#{password},</if>
       #{email},
-      <if test="sex != null">#{sex, typeHandler = cn.edu.cqut.gmw.typehandler.SexTypeHandler},</if>
+      <if test="sex != null">#{sex, typeHandler = cn.edu.cqut.gmw.common.typehandler.SexTypeHandler},</if>
       <if test="createTime != null">#{createTime},</if>
       <if test="createAddr != null">#{createAddr},</if>
       <if test="createMac != null">#{createMac},</if>
       <if test="lastLoginTime != null">#{lastLoginTime},</if>
       <if test="lastLoginAddr != null">#{lastLoginAddr},</if>
       <if test="userStatus != null">
-        #{userStatus, typeHandler = cn.edu.cqut.gmw.typehandler.UserStatusTypeHandler},
+        #{userStatus, typeHandler = cn.edu.cqut.gmw.common.typehandler.UserStatusTypeHandler},
       </if>
     </trim>
   </insert>
@@ -89,14 +93,14 @@
       <if test="phoneNumber != null and phoneNumber != ''">phone_number = #{phoneNumber},</if>
       <if test="password != null and password != ''">password = #{password},</if>
       email = #{email},
-      <if test="sex != null">sex = #{sex, typeHandler = cn.edu.cqut.gmw.typehandler.SexTypeHandler},</if>
+      <if test="sex != null">sex = #{sex, typeHandler = cn.edu.cqut.gmw.common.typehandler.SexTypeHandler},</if>
       <if test="createTime != null">create_time = #{createTime},</if>
       <if test="createAddr != null">create_addr = #{createAddr},</if>
       <if test="createMac != null">create_mac = #{createMac},</if>
       <if test="lastLoginTime != null">last_login_time = #{lastLoginTime},</if>
       <if test="lastLoginAddr != null">last_login_addr = #{lastLoginAddr},</if>
       <if test="userStatus != null">
-        user_status = #{userStatus, typeHandler = cn.edu.cqut.gmw.typehandler.UserStatusTypeHandler},
+        user_status = #{userStatus, typeHandler = cn.edu.cqut.gmw.common.typehandler.UserStatusTypeHandler},
       </if>
     </set>
     where id = #{id}

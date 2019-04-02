@@ -2,7 +2,7 @@ spring:
   datasource:
     name: springboot
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://120.79.155.125:3306/gmw?useUnicode=true&useSSL=false&characterEncoding=utf8
+    url: jdbc:mysql://120.79.155.125:3306/gmw?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -30,7 +30,7 @@ mybatis:
     cache-enabled: true # 是否启用mybatis全局二级缓存
   mapper-locations: classpath:mappers/*.xml
   type-aliases-package: cn.edu.cqut.gmw.entity
-  type-handlers-package: cn.edu.cqut.gmw.typehandler
+  type-handlers-package: cn.edu.cqut.gmw.common.typehandler
 logging:
   level:
     root: INFO

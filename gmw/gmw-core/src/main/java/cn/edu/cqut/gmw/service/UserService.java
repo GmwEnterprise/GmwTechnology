@@ -1,9 +1,7 @@
 package cn.edu.cqut.gmw.service;
 
-import cn.edu.cqut.gmw.dto.UserMessageDto;
-import cn.edu.cqut.gmw.dto.execution.UserExecution;
-import cn.edu.cqut.gmw.enums.status.LoginStatus;
-import cn.edu.cqut.gmw.enums.status.RegisterStatus;
+import cn.edu.cqut.gmw.entity.User;
+import cn.edu.cqut.gmw.vo.UserExecution;
 
 /**
  * 用户类的操作
@@ -13,17 +11,13 @@ import cn.edu.cqut.gmw.enums.status.RegisterStatus;
 public interface UserService {
 
   /**
-   * 验证用户信息，用于登陆
+   * 用户登陆
    *
-   * @param userMessage 用户信息
-   * @return 执行后的结果
+   * @param phone    手机号
+   * @param password 密码
+   * @return 登陆结果
    */
-  UserExecution<LoginStatus> validUser(UserMessageDto userMessage);
+  UserExecution userLogin(String phone, String password);
 
-  /**
-   * 添加新的账户
-   * @param userMessage 账户基本信息
-   * @return 添加结果
-   */
-  UserExecution<RegisterStatus> addNewUser(UserMessageDto userMessage);
+  UserExecution createUser(User createUser);
 }
