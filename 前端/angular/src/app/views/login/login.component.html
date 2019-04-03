@@ -1,33 +1,85 @@
 <div class="full-page">
-  <div class="wrapper">
-    <form nz-form class="login-form" [formGroup]="loginForm" (ngSubmit)="submit()">
+  <!-- 登陆 -->
+  <div class="wrapper" id="landing" *ngIf="type === 1">
+    <form class="landing-form" nz-form>
       <nz-form-item>
         <nz-form-control>
           <nz-input-group [nzPrefix]="prefixUser">
-            <input nz-input type="text" placeholder="手机号码" formControlName="phone" />
+            <ng-template #prefixUser><i nz-icon type="user"></i></ng-template>
+            <input nz-input type="text" placeholder="手机号码" />
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-control>
           <nz-input-group [nzPrefix]="prefixLock">
-            <input nz-input type="password" placeholder="密码" formControlName="password" />
+            <ng-template #prefixLock><i nz-icon type="lock"></i></ng-template>
+            <input nz-input type="password" placeholder="密码" />
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-control>
-          <label nz-checkbox formControlName="remember">
-            <span>保存登陆状态</span>
+          <label nz-checkbox>
+            <span>记住我</span>
           </label>
-          <a class="login-form-forgot" class="login-form-forgot">忘记密码</a>
-          <button type="submit" nz-button class="login-form-button" [nzType]="'primary'" [disabled]="loginForm.invalid">登入</button>
-          或
-          <a href="">注册</a>
+          <a class="login-form-forgot">忘记密码</a>
+          <button class="login-form-button" nz-button [nzType]="'primary'">登陆</button>
+        </nz-form-control>
+        或
+        <a (click)="toRegister()">注册</a>
+      </nz-form-item>
+    </form>
+  </div>
+  <!-- 注册 -->
+  <div class="wrapper register-wrapper" *ngIf="type === 2">
+    <form class="register-form" nz-form>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="nickname" nzRequired>
+          <span>
+            昵称
+            <i nz-icon nz-tooltip nzTitle="其他人对您的称呼" type="question-circle" theme="outline"></i>
+          </span>
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input id="username" nz-input />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzFor="phone" [nzSm]="6" [nzXs]="24" nzRequired>手机号码</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+            <ng-template #addOnBeforeTemplate>
+              <nz-select style="width: 70px;">
+                <nz-option nzLabel="+86" nzValue="+86"></nz-option>
+              </nz-select>
+            </ng-template>
+            <input id="phone" nz-input />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzFor="email" [nzSm]="6" [nzXs]="24">邮箱</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input id="email" nz-input />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzFor="password" [nzSm]="6" [nzXs]="24" nzRequired>密码</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <nz-input-group>
+            <input id="password" nz-input type="password" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzFor="checkPassword" [nzSm]="6" [nzXs]="24" nzRequired>确认密码</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <nz-input-group>
+            <input id="checkPassword" nz-input type="password" />
+          </nz-input-group>
         </nz-form-control>
       </nz-form-item>
     </form>
-    <ng-template #prefixUser><i nz-icon type="user"></i></ng-template>
-    <ng-template #prefixLock><i nz-icon type="lock"></i></ng-template>
   </div>
 </div>

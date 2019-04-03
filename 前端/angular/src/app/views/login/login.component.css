@@ -1,21 +1,27 @@
 .full-page {
   position: fixed;
-  top: 0;
-  bottom: 0;
   left: 0;
   right: 0;
+  top: 0;
+  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(240, 240, 240);
+  background-color: rgb(235, 235, 235);
 }
 
 .wrapper {
-  width: 350px;
-  background-color: #fff;
-  box-sizing: border-box;
-  padding: 40px;
-  box-shadow: 2px 2px 4px #ccc;
+  width: 7rem;
+  background-color: white;
+  padding: 1rem 0.7rem;
+}
+
+.register-wrapper {
+  width: 10rem;
+}
+
+.login-form {
+  max-width: 300px;
 }
 
 .login-form-forgot {
