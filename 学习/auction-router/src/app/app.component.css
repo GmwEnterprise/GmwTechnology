@@ -1,0 +1,14 @@
+.router-box {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  width: 100%;
+}
+
+.router-left {
+  width: 60%;
+}
+
+.router-right {
+  width: 30%;
+}
